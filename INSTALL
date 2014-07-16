@@ -1,0 +1,29 @@
+
+Requirements
+-----------------------------------------------------
+PHP 5.3+
+PHP Modules:
+  PHPSecLib
+
+
+
+PHP Modules Installation
+-----------------------------------------------------
+PHP Pear modules can be installed using the checkDependencies.sh script
+or the 'pear' command
+
+  * PHPSecLib
+    > pear channel-discover phpseclib.sourceforge.net
+    > pear install phpseclib/Crypt_AES
+    > pear install phpseclib/Crypt_DES
+    > pear install phpseclib/Crypt_Hash
+    > pear install phpseclib/Crypt_RC4
+    > pear install phpseclib/Crypt_RSA
+    > pear install phpseclib/Crypt_Random
+    > pear install phpseclib/Crypt_Rijndael
+    > pear install phpseclib/Crypt_TripleDES
+    > pear install phpseclib/File_ANSI
+    > pear install phpseclib/File_ASN1
+    > pear install phpseclib/File_X509
+    > pear install phpseclib/Math_BigInteger
+

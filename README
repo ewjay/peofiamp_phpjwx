@@ -1,0 +1,123 @@
+======================================================
+JWS/JWE library for PHP
+======================================================
+
+This is a PHP implementation of the JWS/JWE specifications :
+
+JSON Web Signature - http://tools.ietf.org/html/draft-ietf-jose-json-web-signature
+JSON Web Encryption - http://tools.ietf.org/html/draft-ietf-jose-json-web-encryption
+
+
+JWS Supported Algorithms:
+
+NONE
+HS256, HS384, HS512
+RS256, RS384, RS512
+
+
+JWE Supported "alg" Algorithms:
+RSA1_5
+RSA-OAEP
+
+
+JWE Supported "enc" Algorithms
+A128CBC-HS256
+A256CBC-HS512
+A128GCM
+A256GCM
+
+
+API:
+
+JWS
+======================================================
+/**
+ * signs a JSON object or string
+ * @param    mixed  $data               Data String or Array to be signed
+ * @param    array  $arr_sig_params     Array of signature params
+ * General parameters
+ *     'typ' : MIME media type of whole JWS
+ *     'cty' : MIME media type of payload
+ *     'kid' : Key ID
+ *     'alg' : Signature Algorithm (HS*|RS*)
+ *
+ * RS specific parameters
+ *     'x5c' : x509 pem encoded certificate
+ *     'x5u' : URL to x509 pem encoded certificate
+ *     'x5t' : X509 certificate thumbprint
+ *     'jku' : URL to JWK set
+ *     'jwk' ' JWK set
+ *
+ * @param    array   $keys           mixed string or array containing path to a private key file  and pass phrases
+ * for HS* signature, pass in a string containing the HMAC secret
+ * For RS* signature, pass an array containing the ath to the private key file used for signing and the pass phrase for the key
+ * The array nust contain the following :
+ *     'key_file' : path to PEM encoded x509 private key
+ *     'password' : passphrase for private key
+ *
+ * @return   string  The JWS as a compact serialized string
+ */
+
+ function jwt_sign($data, $sig_param, $keys)
+
+
+
+/**
+ * Verifies a compact serialized JWS
+ * @param  string   $jwt        The compact JWS to be verified
+ * @param  mixed    $sig_hints  signed JSON object or string
+ * @param  mixed    $sig_hints  Signature verification hints.
+ *
+ * For HS* algorithms,$sig_hints can be the following :
+ *     1) String containing the HMAC secret
+ *     2) Array containing the one or more of the following :
+ *          - String containg the HMAC secret
+ *          - Array containg the following parameters
+ *                'kid' : Key ID
+ *                'secret' : HMAC secret
+ *
+ * For RS* algorithms, $sig_hints is an array with the following parameters:
+ *    'pem' : path to PEM encoded x509 certificate
+ *    'x5c' : x509 certificate or array of x509 certificates
+ *    'x5u' : URL to x509 certificate
+ *    'jku' : URL to JWK set
+ *    'jwk' : string containg JWK set
+ *
+ * @return bool     True if the signatures are verified successfully and False if the signature verification fails
+ */
+function jwt_verify($jwt, $sig_hints = NULL)
+
+
+
+
+
+JWE
+======================================================
+/**
+ * Encrypts data using a private or public key
+ * @param mixed $data Data          string or array to be encrypted
+ * @param mixed $key_file           string path to private or public key file or array of JWK public key
+ * @param bool $is_private_key      indicates whether key file is a private or public key
+ * @param string $pass_phrase       passpharase for the private key
+ * @param string $public_cert_url   URL for x509 certificate
+ * @param string $enc_key           CMK, if null, a random one will be generated
+ * @param string $alg               'alg' algorithm
+ * @param string $enc               'enc' algorithm
+ * @param bool $zip                 whether to zip contents
+ * @return mixed                   string containing compact seriailized JWE or false
+ */
+
+function jwt_encrypt($data, $key_file, $is_private_key=false, $pass_phrase=NULL, $public_cert_url=NULL, $enc_key=NULL, $alg='RSA1_5', $enc='A256CBC-HS512', $zip = true)
+
+
+
+/**
+ * Decrypts a JWE using a private or public key
+ * @param string $jwe             Compact serialized JWE
+ * @param mixed $key_file         String Path to key file or public JWK key as a n array
+ * @param bool $is_private_key    Indicates whether key file is a private or public key
+ * @param null $pass_phrase       Passphrase for private key
+ * @return bool|string            The decrypted content or false
+ */
+
+function jwt_decrypt($jwe, $key_file, $is_private_key=true, $pass_phrase=NULL)
