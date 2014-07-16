@@ -42,7 +42,7 @@ include_once('Crypt/RSA.php');
  * @param    array   $keys           mixed string or array containing path to a private key file  and pass phrases
  * for HS* signature, pass in a string containing the HMAC secret
  * For RS* signature, pass an array containing the ath to the private key file used for signing and the pass phrase for the key
- * The array nust contain the following :
+ * The array must contain the following :
  *     'key_file' : path to PEM encoded x509 private key
  *     'password' : passphrase for private key
  *
@@ -886,13 +886,13 @@ function decrypt_with_key($data, $key_file, $is_private_key=true, $pass_phrase=N
  * @param mixed $data Data          string or array to be encrypted
  * @param mixed $key_file           string path to private or public key file or array of JWK public key
  * @param bool $is_private_key      indicates whether key file is a private or public key
- * @param string $pass_phrase       passpharase for the private key
+ * @param string $pass_phrase       passphrase for the private key
  * @param string $public_cert_url   URL for x509 certificate
  * @param string $enc_key           CMK, if null, a random one will be generated
  * @param string $alg               'alg' algorithm
  * @param string $enc               'enc' algorithm
  * @param bool $zip                 whether to zip contents
- * @return mixed                   string containing compact seriailized JWE or false
+ * @return mixed                   string containing compact serialized JWE or false
  */
 function jwt_encrypt($data, $key_file, $is_private_key=false, $pass_phrase=NULL, $public_cert_url=NULL, $enc_key=NULL, $alg='RSA1_5', $enc='A256CBC-HS512', $zip = true) {
     if(is_string($key_file) && is_file($key_file)) {
@@ -1001,7 +1001,7 @@ function jwt_encrypt($data, $key_file, $is_private_key=false, $pass_phrase=NULL,
 /**
  * Decrypts a JWE using a private or public key
  * @param string $jwe             Compact serialized JWE
- * @param mixed $key_file         String Path to key file or public JWK key as a n array
+ * @param mixed $key_file         String Path to key file or public JWK key as an array
  * @param bool $is_private_key    Indicates whether key file is a private or public key
  * @param null $pass_phrase       Passphrase for private key
  * @return bool|string            The decrypted content or false
