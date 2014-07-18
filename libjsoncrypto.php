@@ -39,7 +39,7 @@ include_once('Crypt/RSA.php');
  *     'jku' : URL to JWK set
  *     'jwk' ' JWK set
  *
- * @param    array   $keys           mixed string or array containing path to a private key file  and pass phrases
+ * @param    mixed   $keys           mixed string or array containing path to a private key file  and pass phrases
  * for HS* signature, pass in a string containing the HMAC secret
  * For RS* signature, pass an array containing the ath to the private key file used for signing and the pass phrase for the key
  * The array must contain the following :
